@@ -1,7 +1,16 @@
 'use strict';
 (function(){
 
-  var app = angular.module('set', []);
+  var app = angular.module('setApp', []);
+
+  app.controller('SetGameCtrl', ['$scope', function($scope) {
+    $scope.deck = Helpers.loadJSON('cards.json');
+    $scope.shuffleDeck = function(){
+      Helpers.shuffleArray($scope.deck);
+      console.log($scope.deck[0]);
+    }
+    console.log($scope.deck[0]);
+  }]);
 
 })();
 
@@ -17,5 +26,3 @@ var oval     = 1,
 var solid    = 1,
     striped  = 2,
     outlined = 3;
-
-var cards = Helpers.loadJSON('cards.json');
