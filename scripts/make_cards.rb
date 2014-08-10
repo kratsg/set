@@ -10,6 +10,6 @@ cards = ((1..3).to_a).product((1..3).to_a).product((1..3).to_a).product((1..3).t
   }
 end
 
-File.open("json/cards.json","w+") do |f|
+File.open("../json/cards.json","w+") do |f|
   f.write JSON.pretty_generate cards.shuffle!
 end
