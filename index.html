@@ -25,7 +25,7 @@
       </div>
 
       <div ng-repeat="row in set.deck | partition:3" class="row">
-        <div class="col-xs-4 card" ng-repeat="card in row" ng-style="{'background-color': '{{card.color | color}}', }">
+        <div class="col-xs-2 card" ng-repeat="card in row" ng-style="{'background-color': '{{card.color | color}}', }">
           <ul>
             <li>{{card.number}}</li>
             <li>{{card.shape}}</li>
