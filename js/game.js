@@ -18,12 +18,4 @@ var solid    = 1,
     striped  = 2,
     outlined = 3;
 
-var cards = [
-  {
-    'number': 1,
-    'color' : red,
-    'shape' : diamond,
-    'fill'  : solid
-  },
-
-]
+var cards = Helpers.loadJSON('cards.json');
