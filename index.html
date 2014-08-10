@@ -4,18 +4,38 @@
     <title>Set</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body ng-controller="SetGameCtrl">
 
-    <button ng-click="shuffleDeck()">Shuffle</button>
-    <ol>
-      <li ng-repeat="card in deck"><ul>
-        <li>{{card.number}}</li>
-        <li>{{card.shape}}</li>
-        <li>{{card.fill}}</li>
-        <li>{{card.color}}</li>
-      </ul></li>
-    </ol>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+  </head>
+  <body ng-controller="SetGameCtrl as set">
+    <div class="container-fluid"><!-- container -->
+
+      <button ng-click="set.shuffleDeck()">Shuffle</button>
+
+      <div class="row">
+        <div class="col-xs-4">test</div>
+        <div class="col-xs-4">ing</div>
+        <div class="col-xs-4">more</div>
+      </div>
+
+      <div ng-repeat="row in set.deck | partition:3" class="row">
+        <div class="col-xs-4 card" ng-repeat="card in row" ng-style="{'background-color': '{{card.color | color}}', }">
+          <ul>
+            <li>{{card.number}}</li>
+            <li>{{card.shape}}</li>
+            <li>{{card.fill}}</li>
+            <li>{{card.color | color}}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- container -->
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
