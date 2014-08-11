@@ -50,13 +50,16 @@ var GameHelpers = (function() {
   // etc. etc. But for now I'm happy enough.
   var isSet = function(){
     for(var prop in arguments[0]){
-      l = arguments.map(function(obj){return obj.prop;});
-      if (l[0] == 1 && l[1] == 3){
-        return false;
-      } else if(l[0] == 1 && l[2] == 2){
-        return false;
-      } else if(l[0] == 2 && l[2] != 2){
-        return false;
+      // skip prototype properties
+      if(arguments[0].hasOwnProperty(prop)){
+        // make array of values for that property
+        l = arguments.map(function(obj){return obj.prop;});
+        // make that array unique
+        l_unique = jQuery.unique(l);
+        // a set will have all items same (length = 1) or all diff (length = same)
+        if( l_unique.length != 1 && l_unique.length != l.length ){
+          return false;
+        }
       }
     }
     return true;
