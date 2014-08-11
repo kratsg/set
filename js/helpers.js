@@ -38,9 +38,20 @@ var Helpers = (function() {
     return array;
   };
 
+  var uniqueArray = function(array){
+    var a = [], l = array.length;
+    for(var i=0; i<l; i++) {
+      for(var j=i+1; j<l; j++)
+            if (array[i] === array[j]) j = ++i;
+      a.push(array[i]);
+    }
+    return a;
+  };
+
   //expose it to the world
   return {
     loadJSON: loadJSON,
     shuffleArray: shuffleArray,
+    uniqueArray: uniqueArray,
   }
 })();

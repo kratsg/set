@@ -35,9 +35,28 @@
 
   var SetGameCtrl = function(){
     this.deck = Helpers.loadJSON('cards.json');
+    this.table = [];
     this.shuffleDeck = function(){
       Helpers.shuffleArray(this.deck);
-    }
+    };
+    this.shuffleTable = function(){
+      Helpers.shuffleArray(this.table);
+    };
+    this.findSets = function(){
+      console.log(GameHelpers.findSets(this.table));
+    };
+    this.drawCards = function(n){
+      // only draw as many as we have left
+      n = Math.min(n, this.deck.length);
+      for(var i=0; i < n; i++){
+        this.table.push(this.deck.shift());
+      }
+    };
+
+    //loaded, shuffle then draw 9 cards
+    this.shuffleDeck();
+    this.drawCards(9);
+
   }
 
   app.controller('SetGameCtrl',SetGameCtrl);
@@ -48,14 +67,15 @@ var GameHelpers = (function() {
   // Not the most elegant or scalable way to determine a set, but it works!
   // Note: This is poor design and requires that a, b and c be the same objects
   // etc. etc. But for now I'm happy enough.
-  var isSet = function(){
-    for(var prop in arguments[0]){
+  var isSet = function(cards){
+    for(var prop in cards[0]){
       // skip prototype properties
-      if(arguments[0].hasOwnProperty(prop)){
+      // also skip ngRepeat properties for dom manipulation
+      if(cards[0].hasOwnProperty(prop) && prop.indexOf('$') === -1){
         // make array of values for that property
-        l = arguments.map(function(obj){return obj.prop;});
-        // make that array unique
-        l_unique = jQuery.unique(l);
+        var l = cards.map(function(obj){return obj[prop];});
+        // make that array unique 
+        var l_unique = Helpers.uniqueArray(l);
         // a set will have all items same (length = 1) or all diff (length = same)
         // if(l_unique.length == 2) return false; // also works, but less robust
         if( l_unique.length != 1 && l_unique.length != l.length ) return false;
@@ -66,12 +86,12 @@ var GameHelpers = (function() {
 
   // Find all sets by iterating through all triples. Again, not elegant but works
   var findSets = function(arr){
-    sets = [];
-    for (var i=0; i < list.length - 2;i++){
-        for (var j=i+1; j < list.length-1;j++){
-            for (var k=j+1; k < list.length;k++){
-                if (isSet(list[i],list[j],list[k])){
-                    sets.push([list[i],list[j],list[k]]);
+    var sets = [];
+    for (var i=0; i < arr.length - 2;i++){
+        for (var j=i+1; j < arr.length-1;j++){
+            for (var k=j+1; k < arr.length;k++){
+                if (isSet( [arr[i],arr[j],arr[k]] )){
+                    sets.push([arr[i],arr[j],arr[k]]);
                 }
             }
         }
@@ -81,11 +101,11 @@ var GameHelpers = (function() {
 
   // Find all sets by iterating through all triples. Again, not elegant but works
   var findSet = function(arr){
-    for (var i=0; i < list.length - 2;i++){
-        for (var j=i+1; j < list.length-1;j++){
-            for (var k=j+1; k < list.length;k++){
-                if (isSet(list[i],list[j],list[k])){
-                    return [list[i],list[j],list[k]];
+    for (var i=0; i < arr.length - 2;i++){
+        for (var j=i+1; j < arr.length-1;j++){
+            for (var k=j+1; k < arr.length;k++){
+                if (isSet( [arr[i],arr[j],arr[k]] )){
+                    return [arr[i],arr[j],arr[k]];
                 }
             }
         }

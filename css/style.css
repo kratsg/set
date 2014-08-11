@@ -1,4 +1,20 @@
+body {
+  background-color: #CCC;
+}
+
 .card {
-  padding-bottom: 25%;
+  padding-bottom: 20%;
   height: 0;
+  border: 10px solid;
+  border-radius: 25px;
+  background: white;
+}
+
+/* http://lea.verou.me/css3patterns/#diagonal-stripes */
+.striped {
+  background-image: repeating-linear-gradient(135deg, transparent, transparent 35px, white 35px, white 70px);
+}
+
+.no-fill {
+  background: white;
 }
