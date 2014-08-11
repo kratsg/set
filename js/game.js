@@ -44,6 +44,60 @@
 
 })();
 
+// Not the most elegant or scalable way to determine a set, but it works!
+// Note: This is poor design and requires that a, b and c be the same objects
+// etc. etc. But for now I'm happy enough.
+function isSet(a,b,c){
+    k = Object.keys(a)
+    for (var i=0; i < k.length; i++){
+        h = k[i]
+        l = [a[h],b[h],c[h]].sort()
+        if (l[0] == 1 && l[1]==3){
+            return false
+        }
+        else if (l[0] == 1 && l[2]==2){
+            return false
+        }
+        else if (l[0]==2 && l[2]!=2){
+            return false
+        }
+    }
+    return true
+}
+
+// Find all sets by iterating through all triples. Again, not elegant but works
+function findSets(list){
+    sets = []
+    for (var i=0; i < list.length - 2;i++){
+        for (var j=i+1; j < list.length-1;j++){
+            for (var k=j+1; k < list.length;k++){
+                if (isSet(list[i],list[j],list[k])){
+                    sets.push([list[i],list[j],list[k]])
+                }
+            }
+        }
+    }
+    return sets
+}
+
+
+// Find all sets by iterating through all triples. Again, not elegant but works
+function findSet(list){
+    for (var i=0; i < list.length - 2;i++){
+        for (var j=i+1; j < list.length-1;j++){
+            for (var k=j+1; k < list.length;k++){
+                if (isSet(list[i],list[j],list[k])){
+                    return [list[i],list[j],list[k]]
+                }
+            }
+        }
+    }
+    return []
+}
+
+                    
+                    
+
 //http://www.setgame.com/sites/default/files/instructions/SET%20INSTRUCTIONS%20-%20ENGLISH%208.23.11.pdf
 var red      = 1,
     purple   = 2,
