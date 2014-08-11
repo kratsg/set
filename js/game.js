@@ -57,9 +57,8 @@ var GameHelpers = (function() {
         // make that array unique
         l_unique = jQuery.unique(l);
         // a set will have all items same (length = 1) or all diff (length = same)
-        if( l_unique.length != 1 && l_unique.length != l.length ){
-          return false;
-        }
+        // if(l_unique.length == 2) return false; // also works, but less robust
+        if( l_unique.length != 1 && l_unique.length != l.length ) return false;
       }
     }
     return true;
