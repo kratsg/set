@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-  var app = angular.module('setApp', []);
+  var app = angular.module('setApp', ['d3']);
 
   //http://stackoverflow.com/questions/21644493/how-to-split-the-ng-repeat-data-with-three-columns-using-bootstrap
   app.filter('partition', function() {
@@ -23,14 +23,21 @@
     return filter;
   });
 
-  // why do I write filters this way? Probably to encapsulate code
-  app.filter('color', function(){
-    return function(num){
-      // '', 'red', 'purple', 'green'
-      var colors = ['','#CC0000','#CC00CC','#00CC00'];
-      return colors[num];
+  app.directive('card', ['d3Service', function(d3Service){
+    return {
+      restrict: 'EA', //only element or attribute
+      scope: {},
+      link: function(scope, element, attrs) {
+        d3Service.d3().then(function(d3){
+          console.log(scope, element, attrs);
+          console.log(scope.$parent.card);
+          //d3 is the raw d3 object
+          var svg = d3.select(element[0])
+            .append("svg");
+        });
+      },
     };
-  });
+  }]);
 
 
   var SetGameCtrl = function(){

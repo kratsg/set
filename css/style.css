@@ -2,7 +2,7 @@ body {
   background-color: #CCC;
 }
 
-.card {
+div[card] {
   padding-bottom: 20%;
   height: 0;
   border: 10px solid;
@@ -10,11 +10,32 @@ body {
   background: white;
 }
 
+div[color="1"] {
+  /* red */
+  background-color: #CC0000;
+  border-color: #CC0000;
+}
+
+div[color="2"] {
+  background-color: #CC00CC;
+  border-color: #CC00CC;
+}
+
+div[color="3"] {
+  background-color: #00CC00;
+  border-color: #00CC00;
+}
+
+div[fill="1"] {
+  background-image: none;
+  background-color: #FFF;;
+}
+
 /* http://lea.verou.me/css3patterns/#diagonal-stripes */
-.striped {
+div[fill="2"] {
   background-image: repeating-linear-gradient(135deg, transparent, transparent 35px, white 35px, white 70px);
 }
 
-.no-fill {
-  background: white;
+div[fill="3"] {
+  background-image: transparent;/* do nothing */
 }

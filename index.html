@@ -25,12 +25,10 @@
 
       <div ng-repeat="row in set.table | partition:3" class="row">
         <div class="col-xs-1">&nbsp;</div><!-- to fix offset -->
-        <div class="col-xs-2 card col-xs-offset-1" ng-repeat="card in row" ng-style="card.fill != 3 && {'border-color': '{{card.color | color}}', 'background-color': '{{card.color | color}}', } || true && {'border-color': '{{card.color | color}}', }" ng-class="{'striped': card.fill==2, 'no-fill': card.fill == 3}">
+        <div card class="col-xs-2 card col-xs-offset-1" ng-repeat="card in row" color="{{card.color}}" shape="{{card.shape}}" number="{{card.number}}" fill="{{card.fill}}" >
           <ul>
             <li>num:   {{card.number}}</li>
             <li>shape: {{card.shape}}</li>
-            <li>fill:  {{card.fill}}</li>
-            <li>color: {{card.color}}</li>
           </ul>
         </div>
       </div>
