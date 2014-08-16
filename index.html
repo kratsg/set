@@ -17,7 +17,20 @@
     <div class="container"><!-- container -->
 
       <div class="row">
-        <h2 class="col-xs-4 col-xs-offset-4" style="text-align: center;" >{{set.numSets}} sets avail.</h2>
+        <h2 class="col-xs-3 col-xs-offset-2" style="text-align: center;" >
+          <ng-pluralize count="set.numSets"
+                 when="{'0': 'No sets are available.',
+                     'one': '1 set is available.',
+                     'other': '{} sets are available.'}">
+          </ng-pluralize>
+        </h2>
+        <h2 class="col-xs-3 col-xs-offset-2" style="text-align: center;" >
+          <ng-pluralize count="set.active.length"
+                 when="{'0': 'No cards are selected.',
+                     'one': '1 card is selected.',
+                     'other': '{} cards are selected.'}">
+          </ng-pluralize>
+        </h2>
       </div>
 
       <div class="row">

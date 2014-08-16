@@ -185,31 +185,30 @@ var circleAttributes = circles
                        .attr("r", function (d) { return d.radius; })
                        .style("fill", function(d) { return d.color; });
 
-global num2shape={1:"circle",2:"rect"}
+var num2shape={1:"circle",2:"rect"}
 function addShapes(svgC,d){
 	for(i=1;i<d["number"];i++){
 		svg.append(num2shape[d["shape"]]).attr("cx",width/2)
-										 .attr("cy",i*height/(d["number"]+1)
-										 
+                    .attr("cy",i*height/(d["number"]+1));
 	}
 }
 
 
-function addCircle(svgC,d) = {
+function addCircle(svgC,d) {
             	svgC.append("circle")
             		.attr("cx",d.cx)
             		.attr("cy",d.cy)
             		.attr("r",d.r)			
-            });
+            }
             
-function addRect(svgC,d) = {
+function addRect(svgC,d) {
             	svgC.append("rect")
             		.attr("cx",d.cx)
             		.attr("cy",d.cy)
             		.attr("width",d.r)				
-            });
+            }
 
-function addTri(svgC,d) = {
+function addTri(svgC,d) {
             	svgC.append("polygon")
             		.attr("points",[
             		[d.cx/3,d.cy-d.cx/6],
@@ -217,7 +216,7 @@ function addTri(svgC,d) = {
             		[d.cx,d.cy+d.cx/3]
             		]
             		)				
-            });
+            }
         
 var lineFunction = d3.svg.line()
                 .x(function(d) {return d.x;})
