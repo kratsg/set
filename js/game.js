@@ -29,8 +29,8 @@
       scope: {},
       link: function(scope, element, attrs) {
         d3Service.d3().then(function(d3){
-          console.log(scope, element, attrs);
-          console.log(scope.$parent.card);
+          //console.log(scope, element, attrs);
+          //console.log(scope.$parent.card);
           //d3 is the raw d3 object
           var svg = d3.select(element[0])
             .append("svg");
@@ -41,8 +41,11 @@
 
 
   var SetGameCtrl = function(){
-    this.deck = Helpers.loadJSON('cards.json');
+    this.deck = [];
     this.table = [];
+    this.active = [];
+    this.numSets = 0;
+
     this.shuffleDeck = function(){
       Helpers.shuffleArray(this.deck);
     };
@@ -50,20 +53,38 @@
       Helpers.shuffleArray(this.table);
     };
     this.findSets = function(){
-      console.log(GameHelpers.findSets(this.table));
+      var sets = GameHelpers.findSets(this.table);
+      this.numSets = sets.length;
+      return sets;
     };
     this.drawCards = function(n){
       // only draw as many as we have left
       n = Math.min(n, this.deck.length);
       for(var i=0; i < n; i++){
-        this.table.push(this.deck.shift());
+        var newCard = this.deck.shift()
+        this.table.push(newCard);
       }
+      this.findSets();
     };
+    this.selectCard = function(card){
+      var active = this.is_active(card);
+      if(this.active.length == 3 && !active) return false;
+      if(!active){
+        this.active.push(card);
+      }else{
+        this.active = Helpers.delVal(this.active, card);
+      }
+      return true;
+    };
+    this.is_active = function(card){
+      return this.active.indexOf(card) != -1;
+    }
 
+    this.deck = Helpers.loadJSON('cards.json');
     //loaded, shuffle then draw 9 cards
     this.shuffleDeck();
     this.drawCards(9);
-
+    this.findSets();
   }
 
   app.controller('SetGameCtrl',SetGameCtrl);

@@ -57,11 +57,24 @@ var Helpers = (function() {
   };
 
   var swapVal = function(array, oldVal, newVal){
-    var index = array.indexOf(oldVal);
+    var index = array.indexOf(array, oldVal);
     if (index > -1){
       array[index] = newVal;
     }
     return array;
+  };
+
+  var indexOf = function(array, card){
+    for (var i = 0; i < array.length; i++) {
+        if (cardEq(array[i], card) ) {
+            return i;
+        }
+    }
+    return -1;
+  };
+
+  var cardEq = function(card1, card2){
+    return (card1.shape==card2.shape)&(card1.number==card2.number)&(card1.color==card2.color)&(card1.fill==card2.fill)
   };
 
   //expose it to the world

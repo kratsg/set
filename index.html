@@ -17,6 +17,10 @@
     <div class="container"><!-- container -->
 
       <div class="row">
+        <h2 class="col-xs-4 col-xs-offset-4" style="text-align: center;" >{{set.numSets}} sets avail.</h2>
+      </div>
+
+      <div class="row">
         <button class="col-xs-3" ng-click="set.shuffleDeck()">Shuffle Deck</button>
         <button class="col-xs-3" ng-click="set.shuffleTable()">Shuffle Table</button>
         <button class="col-xs-3" ng-click="set.findSets()">Find Sets</button>
@@ -25,7 +29,7 @@
 
       <div ng-repeat="row in set.table | partition:3" class="row">
         <div class="col-xs-1">&nbsp;</div><!-- to fix offset -->
-        <div card class="col-xs-2 card col-xs-offset-1" ng-repeat="card in row" color="{{card.color}}" shape="{{card.shape}}" number="{{card.number}}" fill="{{card.fill}}" >
+        <div card class="col-xs-2 card col-xs-offset-1" ng-repeat="card in row" color="{{card.color}}" shape="{{card.shape}}" number="{{card.number}}" fill="{{card.fill}}" ng-class="{active: set.is_active(card)}" highlighted="{{card.highlighted}}" ng-click="set.selectCard(card)">
           <ul>
             <li>num:   {{card.number}}</li>
             <li>shape: {{card.shape}}</li>
