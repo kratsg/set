@@ -48,11 +48,29 @@ var Helpers = (function() {
     return a;
   };
 
+  var delVal = function(array, val){
+    var index = array.indexOf(val);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+    return array;
+  };
+
+  var swapVal = function(array, oldVal, newVal){
+    var index = array.indexOf(oldVal);
+    if (index > -1){
+      array[index] = newVal;
+    }
+    return array;
+  };
+
   //expose it to the world
   return {
-    loadJSON: loadJSON,
+    loadJSON:     loadJSON,
     shuffleArray: shuffleArray,
-    uniqueArray: uniqueArray,
+    uniqueArray:  uniqueArray,
+    delVal:       delVal,
+    swapVal:      swapVal,
   }
 })();
 
