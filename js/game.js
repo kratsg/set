@@ -163,3 +163,79 @@ var oval     = 1,
 var solid    = 1,
     striped  = 2,
     outlined = 3;
+
+var jsonCircles = [
+                      { "x_axis": 30, "y_axis": 30, "radius": 20, "color" : "green" },
+                      { "x_axis": 70, "y_axis": 70, "radius": 20, "color" : "purple"},
+                      { "x_axis": 110, "y_axis": 100, "radius": 20, "color" : "red"}];
+
+var svgContainer = d3.select("body").append("svg")
+                                    .attr("width", 200)
+                                    .attr("height", 200);
+
+
+var circles = svgContainer.selectAll("circle")
+                          .data(jsonCircles)
+                          .enter()
+                          .append("circle");
+
+var circleAttributes = circles
+                       .attr("cx", function (d) { return d.x_axis; })
+                       .attr("cy", function (d) { return d.y_axis; })
+                       .attr("r", function (d) { return d.radius; })
+                       .style("fill", function(d) { return d.color; });
+
+global num2shape={1:"circle",2:"rect"}
+function addShapes(svgC,d){
+	for(i=1;i<d["number"];i++){
+		svg.append(num2shape[d["shape"]]).attr("cx",width/2)
+										 .attr("cy",i*height/(d["number"]+1)
+										 
+	}
+}
+
+
+function addCircle(svgC,d) = {
+            	svgC.append("circle")
+            		.attr("cx",d.cx)
+            		.attr("cy",d.cy)
+            		.attr("r",d.r)			
+            });
+            
+function addRect(svgC,d) = {
+            	svgC.append("rect")
+            		.attr("cx",d.cx)
+            		.attr("cy",d.cy)
+            		.attr("width",d.r)				
+            });
+
+function addTri(svgC,d) = {
+            	svgC.append("polygon")
+            		.attr("points",[
+            		[d.cx/3,d.cy-d.cx/6],
+            		[d.cx*2/3,d.cy-d.cx/6],
+            		[d.cx,d.cy+d.cx/3]
+            		]
+            		)				
+            });
+        
+var lineFunction = d3.svg.line()
+                .x(function(d) {return d.x;})
+                .y(function(d) { return d.y;})
+                .interpolate("basis-closed");
+
+
+var lineData = [{ "x": 0,   "y": 20},
+                { "x": 40,  "y": 0},
+                { "x": 80,  "y": 15},
+                { "x": 120,  "y": 0},
+                { "x": 120, "y": 20},
+                { "x": 80,  "y": 40},
+                { "x": 40,  "y": 25},
+                { "x": 0,    "y": 40}
+];
+
+
+var svgContainer = d3.select('body').append('svg').attr('width', 200).attr('height', 200);
+
+var lineGraph = svgContainer.append('path').attr("d", lineFunction(lineData)).attr("stroke", "blue").attr("stroke-width", 2).attr("fill", "red");
