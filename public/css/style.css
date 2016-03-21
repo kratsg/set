@@ -1,8 +1,67 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #CCC;
 }
 
-a {
-  color: #00B7FF;
+div[card] {
+  padding-bottom: 20%;
+  height: 0;
+  border: 10px solid;
+  border-radius: 25px;
+  background: white;
+  transform: rotate(90deg) scale(1.0);
+  transition: all 0.1s ease-in;
 }
+
+div[card][color="1"] {
+  /* red */
+  background-color: #CC0000;
+  border-color: #CC0000;
+}
+
+div[card][color="2"] {
+  /* purple */
+  background-color: #CC00CC;
+  border-color: #CC00CC;
+}
+
+div[card][color="3"] {
+  /* green */
+  background-color: #00CC00;
+  border-color: #00CC00;
+}
+
+div[card][fill="1"] {
+  /* no fill, white background */
+  background-image: none;
+  background-color: #FFF;;
+}
+
+/* http://lea.verou.me/css3patterns/#diagonal-stripes */
+div[card][fill="2"] {
+  /* striped fill */
+  background-image: repeating-linear-gradient(135deg, transparent, transparent 35px, white 35px, white 70px);
+}
+
+div[card][fill="3"] {
+  /* solid background */
+  background-image: transparent;/* do nothing */
+}
+
+div[card]:hover {
+  -webkit-box-shadow: 15px -15px 20px rgba(0,0, 0, 0.4);
+  -moz-box-shadow: 15px -15px 20px rgba(0,0, 0, 0.4);
+  box-shadow: 15px -15px 20px rgba(0,0, 0, 0.4);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  transform: rotate(90deg) scale(1.05);
+}
+
+div[card].active {
+  -webkit-box-shadow: 15px -15px 20px rgba(0,0, 0, 0.8);
+  -moz-box-shadow: 15px -15px 20px rgba(0,0, 0, 0.8);
+  box-shadow: 15px -15px 20px rgba(0,0, 0, 0.8);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  transform: rotate(90deg) scale(1.05);
+}
+
