@@ -12,9 +12,7 @@ html(lang='en' ng-app='setApp')
     div.container
         div.row
             h2.col-xs-3.col-xs-offset-2(style='text-align: center;')
-                ng-pluralize(count='set.numSets', when="{'0': 'No sets are available.',
-                     'one': '1 set is available.',
-                     'other': '{} sets are available.'}")
+                ng-pluralize(count='set.numSets', when="{'0': 'No sets are available.', 'one': '1 set is available.', 'other': '{} sets are available.'}")
             h2.col-xs-3.col-xs-offset-2(style='text-align: center;')
                 ng-pluralize(count="set.active.length" when="{'0': 'No cards are selected.', 'one': '1 card is selected.', 'other': '{} cards are selected.'}")
 
@@ -25,8 +23,9 @@ html(lang='en' ng-app='setApp')
             button.col-xs-3(ng-click='set.drawCards(3)') Draw 3 More
 
         div.row(ng-repeat='row in set.table | partition:3')
-            div.col-xs-1 &nbps; // to fix offset
-            div.card.col-xs-2.col-xs-offset-1(card ng-repeat('card in row') color='{{card.color}}' shape='{{card.shape}}' number='{{card.number}}' fill='{{card.fill}}' ng-class='{active: set.isactive(card)}' highlighted={{card.highlighted}}' ng-click='set.selectCard(card)')
+            // to fix offset
+            div.col-xs-1 &nbsp;
+            div.card.col-xs-2.col-xs-offset-1(card ng-repeat='card in row' color='{{card.color}}' shape='{{card.shape}}' number='{{card.number}}' fill='{{card.fill}}' ng-class='{active: set.isactive(card)}' highlighted='{{card.highlighted}}' ng-click='set.selectCard(card)')
                 ul
                     li num: {{card.number}}
                     li shape: {{card.shape}}

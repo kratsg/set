@@ -80,7 +80,7 @@
       return this.active.indexOf(card) != -1;
     }
 
-    this.deck = Helpers.loadJSON('cards.json');
+    this.deck = Helpers.loadJSON('/js/cards.json');
     //loaded, shuffle then draw 9 cards
     this.shuffleDeck();
     this.drawCards(9);
@@ -102,7 +102,7 @@ var GameHelpers = (function() {
       if(cards[0].hasOwnProperty(prop) && prop.indexOf('$') === -1){
         // make array of values for that property
         var l = cards.map(function(obj){return obj[prop];});
-        // make that array unique 
+        // make that array unique
         var l_unique = Helpers.uniqueArray(l);
         // a set will have all items same (length = 1) or all diff (length = same)
         // if(l_unique.length == 2) return false; // also works, but less robust
@@ -140,7 +140,7 @@ var GameHelpers = (function() {
     }
     return [];
   };
- 
+
   return {
     isSet: isSet,
     findSets: findSets,
@@ -198,14 +198,14 @@ function addCircle(svgC,d) {
             	svgC.append("circle")
             		.attr("cx",d.cx)
             		.attr("cy",d.cy)
-            		.attr("r",d.r)			
+            		.attr("r",d.r)
             }
-            
+
 function addRect(svgC,d) {
             	svgC.append("rect")
             		.attr("cx",d.cx)
             		.attr("cy",d.cy)
-            		.attr("width",d.r)				
+            		.attr("width",d.r)
             }
 
 function addTri(svgC,d) {
@@ -215,9 +215,9 @@ function addTri(svgC,d) {
             		[d.cx*2/3,d.cy-d.cx/6],
             		[d.cx,d.cy+d.cx/3]
             		]
-            		)				
+            		)
             }
-        
+
 var lineFunction = d3.svg.line()
                 .x(function(d) {return d.x;})
                 .y(function(d) { return d.y;})
