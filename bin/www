@@ -5,6 +5,7 @@
  */
 
 var app = require('../app');
+var io = require('../services/io');
 var debug = require('debug')('set:server');
 var http = require('http');
 
@@ -20,6 +21,12 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * Attach io to the server
+ */
+
+io.attach(server);
 
 /**
  * Listen on provided port, on all network interfaces.
